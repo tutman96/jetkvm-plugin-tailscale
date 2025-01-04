@@ -1,1 +1,3 @@
 tmp/
+*.tar.gz
+jetkvm-plugin-tailscale
