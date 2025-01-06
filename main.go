@@ -33,7 +33,7 @@ func connect(ctx context.Context) (*PluginImpl, error) {
 	}
 
 	impl := &PluginImpl{}
-	client := jsonrpc2.NewConn(ctx, jsonrpc2.NewBufferedStream(conn, jsonrpc2.VSCodeObjectCodec{}), plugin.HandleRPC(impl))
+	client := jsonrpc2.NewConn(ctx, jsonrpc2.NewPlainObjectStream(conn), plugin.HandleRPC(impl))
 	impl.client = client
 
 	return impl, nil

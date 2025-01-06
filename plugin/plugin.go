@@ -8,12 +8,16 @@ import (
 )
 
 type PluginStatus struct {
-	Status string  `json:"status" oneOf:"running,loading,pending-configuration,error"`
-	Error  *string `json:"error,omitempty"`
+	Status  string  `json:"status" oneOf:"running,loading,pending-configuration,error"`
+	Message *string `json:"message,omitempty"`
+}
+
+type SupportedMethodsResponse struct {
+	SupportedRpcMethods []string `json:"supported_rpc_methods"`
 }
 
 type PluginHandler interface {
-	GetPluginSupportedMethods(ctx context.Context) ([]string, error)
+	GetPluginSupportedMethods(ctx context.Context) (SupportedMethodsResponse, error)
 	GetPluginStatus(ctx context.Context) (PluginStatus, error)
 }
 
