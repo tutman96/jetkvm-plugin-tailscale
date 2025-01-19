@@ -17,7 +17,7 @@ func (p *PluginImpl) waitForIP(ctx context.Context) (net.IP, error) {
 		case <-ctx.Done():
 			return nil, fmt.Errorf("context cancelled")
 		case <-ticker.C:
-			log.Printf("Waiting for Tailscale to obtain an ip...")
+			// log.Printf("Waiting for Tailscale to obtain an ip...")
 			ipv4Addr, _ := p.tailscaleServer.TailscaleIPs()
 			slice := ipv4Addr.AsSlice()
 			if slice == nil {

@@ -6,6 +6,7 @@ toolchain go1.23.4
 
 require (
 	github.com/caarlos0/env v3.5.0+incompatible
+	github.com/gwatts/rootcerts v0.0.0-20250101202213-6b948e2b3fef
 	github.com/pion/turn/v4 v4.0.0
 	github.com/sourcegraph/jsonrpc2 v0.2.0
 	tailscale.com v1.78.3
@@ -30,6 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.26.7 // indirect
 	github.com/aws/smithy-go v1.19.0 // indirect
 	github.com/bits-and-blooms/bitset v1.13.0 // indirect
+	github.com/breml/rootcerts v0.2.20-0.20250117214458-60248d60df1e // indirect
 	github.com/coder/websocket v1.8.12 // indirect
 	github.com/coreos/go-iptables v0.7.1-0.20240112124308-65c67c9f46e6 // indirect
 	github.com/dblohm7/wingoes v0.0.0-20240119213807-a09d6be7affa // indirect

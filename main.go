@@ -6,8 +6,13 @@ import (
 	"log"
 	"net"
 	"os"
+	"os/exec"
 	"os/signal"
 
+	// This is needed since Tailscale issues LetsEncrypt certificates and validates them against
+	// the golang system store, which has no ability to override in the Go runtime (for obvious reasons).
+	// See https://github.com/tailscale/tailscale/issues/14690
+	_ "github.com/breml/rootcerts"
 	"github.com/caarlos0/env"
 	"github.com/sourcegraph/jsonrpc2"
 	"github.com/tutman96/jetkvm-plugin-tailscale/plugin"
@@ -20,6 +25,8 @@ type PluginImpl struct {
 	tailscaleServer *tsnet.Server
 	tailscaleClient *tailscale.LocalClient
 }
+
+var version = "dev"
 
 var Config struct {
 	PluginSocket     string `env:"JETKVM_PLUGIN_SOCK" envDefault:"./tmp/plugin.sock"`
@@ -51,6 +58,8 @@ func main() {
 		cancel()
 	}()
 
+	log.Default().SetPrefix("[jetkvm-plugin-tailscale v" + version + "] ")
+
 	impl, err := connect(ctx)
 	if err != nil {
 		log.Fatal(err)
@@ -70,6 +79,17 @@ func main() {
 		log.Fatal(err) // TODO: gracefully handle error now that the server can report it
 	}
 	defer turnServer.Close()
+
+	cmd := exec.CommandContext(ctx, "/sbin/ifconfig", "lo", "127.0.0.1", "up")
+	err = cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = impl.CreateProxyServer(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	<-ctx.Done()
 }

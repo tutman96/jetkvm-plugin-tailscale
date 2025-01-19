@@ -1,7 +1,7 @@
 {
   "manifest_version": "1",
   "name": "tailscale",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Provides Tailscale support for the JetKVM",
   "homepage": "https://github.com/tutman96/jetkvm-plugin-tailscale",
   "bin": "./jetkvm-plugin-tailscale"

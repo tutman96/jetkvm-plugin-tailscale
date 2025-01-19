@@ -2,7 +2,6 @@ package plugin
 
 import (
 	"context"
-	"log"
 
 	"github.com/sourcegraph/jsonrpc2"
 )
@@ -23,7 +22,7 @@ type PluginHandler interface {
 
 func HandleRPC(handler PluginHandler) jsonrpc2.Handler {
 	return jsonrpc2.HandlerWithError(func(ctx context.Context, conn *jsonrpc2.Conn, req *jsonrpc2.Request) (interface{}, error) {
-		log.Printf("Received request: %s", req.Method)
+		// log.Printf("Received request: %s", req.Method)
 		switch req.Method {
 		case "getPluginSupportedMethods":
 			return handler.GetPluginSupportedMethods(ctx)
