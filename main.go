@@ -9,10 +9,6 @@ import (
 	"os/exec"
 	"os/signal"
 
-	// This is needed since Tailscale issues LetsEncrypt certificates and validates them against
-	// the golang system store, which has no ability to override in the Go runtime (for obvious reasons).
-	// See https://github.com/tailscale/tailscale/issues/14690
-	_ "github.com/breml/rootcerts"
 	"github.com/caarlos0/env"
 	"github.com/sourcegraph/jsonrpc2"
 	"github.com/tutman96/jetkvm-plugin-tailscale/plugin"
