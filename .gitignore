@@ -1,3 +1,4 @@
 tmp/
 *.tar.gz
 jetkvm-plugin-tailscale
+renovate.json
