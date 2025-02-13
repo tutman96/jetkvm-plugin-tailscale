@@ -3,6 +3,6 @@
   "name": "tailscale",
   "version": "0.2.1",
   "description": "Provides Tailscale support for the JetKVM",
-  "homepage": "https://github.com/TheTechNetwork/jetkvm-plugin-tailscale",
+  "homepage": "github.com/tutman96/jetkvm-plugin-tailscale",
   "bin": "./jetkvm-plugin-tailscale"
 }

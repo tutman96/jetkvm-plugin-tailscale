@@ -11,7 +11,7 @@ import (
 
 	"github.com/caarlos0/env"
 	"github.com/sourcegraph/jsonrpc2"
-	"github.com/TheTechNetwork/jetkvm-plugin-tailscale/plugin"
+	"github.com/tutman96/jetkvm-plugin-tailscale/plugin"
 	"tailscale.com/client/tailscale"
 	"tailscale.com/tsnet"
 )

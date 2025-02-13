@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 
-	"github.com/TheTechNetwork/jetkvm-plugin-tailscale/plugin"
+	"github.com/tutman96/jetkvm-plugin-tailscale"
 )
 
 func (p *PluginImpl) GetPluginSupportedMethods(ctx context.Context) (plugin.SupportedMethodsResponse, error) {
