@@ -1,4 +1,4 @@
-module github.com/tutman96/jetkvm-plugin-tailscale
+module github.com/TheTechNetwork/jetkvm-plugin-tailscale
 
 go 1.23.1
 
