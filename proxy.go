@@ -30,7 +30,19 @@ func (p *PluginImpl) CreateProxyServer(ctx context.Context) error {
 		Handler: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			// Redirect to HTTPS if TLS is available, otherwise proxy the request
 			if useTLS && r.TLS == nil {
-				httpsURL := fmt.Sprintf("https://%s%s", r.Host, r.RequestURI)
+				status, err := p.tailscaleClient.Status(r.Context())
+				if err != nil {
+					log.Printf("Error getting Tailscale status: %v", err)
+					http.Error(w, fmt.Sprintf("error getting tailscale status: %v", err), http.StatusInternalServerError)
+				}
+
+				host := r.Host
+				if status.Self != nil && len(status.CertDomains) > 0 {
+					// Use the first domain from the Tailscale status
+					host = status.CertDomains[0]
+				}
+
+				httpsURL := fmt.Sprintf("https://%s%s", host, r.RequestURI)
 				http.Redirect(w, r, httpsURL, http.StatusMovedPermanently)
 			} else {
 				proxy.ServeHTTP(w, r)

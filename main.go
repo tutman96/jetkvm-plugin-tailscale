@@ -8,8 +8,10 @@ import (
 	"os"
 	"os/exec"
 	"os/signal"
+	"path"
 
 	"github.com/caarlos0/env"
+	"github.com/gwatts/rootcerts"
 	"github.com/sourcegraph/jsonrpc2"
 	"github.com/tutman96/jetkvm-plugin-tailscale/plugin"
 	"tailscale.com/client/tailscale"
@@ -54,7 +56,21 @@ func main() {
 		cancel()
 	}()
 
+	// Update golang root certificates to allow Tailscale to trust the control plane
+	rootcerts.UpdateDefaultTransport()
+
 	log.Default().SetPrefix("[jetkvm-plugin-tailscale v" + version + "] ")
+
+	// If there is a debug file in the working directory, log to plugin.log instead of stdout
+	debugEnabled, err := os.Stat(path.Join(Config.PluginWorkingDir, "debug"))
+	if err == nil && debugEnabled != nil {
+		logFile, err := os.OpenFile(path.Join(Config.PluginWorkingDir, "plugin.log"), os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer logFile.Close()
+		log.SetOutput(logFile)
+	}
 
 	impl, err := connect(ctx)
 	if err != nil {
