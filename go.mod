@@ -7,7 +7,7 @@ toolchain go1.23.4
 require (
 	github.com/caarlos0/env v3.5.0+incompatible
 	github.com/gwatts/rootcerts v0.0.0-20250101202213-6b948e2b3fef
-	github.com/pion/turn/v4 v4.0.0
+	github.com/pion/turn/v4 v4.0.2
 	github.com/sourcegraph/jsonrpc2 v0.2.0
 	tailscale.com v1.80.2
 )
@@ -62,7 +62,7 @@ require (
 	github.com/mitchellh/go-ps v1.0.0 // indirect
 	github.com/pierrec/lz4/v4 v4.1.21 // indirect
 	github.com/pion/dtls/v3 v3.0.1 // indirect
-	github.com/pion/logging v0.2.2 // indirect
+	github.com/pion/logging v0.2.3 // indirect
 	github.com/pion/randutil v0.1.0 // indirect
 	github.com/pion/stun/v3 v3.0.0 // indirect
 	github.com/pion/transport/v3 v3.0.7 // indirect
