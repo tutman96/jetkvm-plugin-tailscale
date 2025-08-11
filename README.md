@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This repo has been archived since there seemed to be little desire for having a plugin system as a whole. Now that JetKVM supports TUN devices natively, the need for having a complex plugin is nearly removed other than providing a better UX
+
 # Tailscale JetKVM Plugin
 This is a plugin for the JetKVM to add Tailscale support. It implements a simple TLS proxy to expose the JetKVM interface to the tailnet as well as a WebRTC TURN server to provide a mechanism to proxy WebRTC traffic through the tailnet without kernel-level TUN device support.
 
